@@ -1,0 +1,16 @@
+{
+  "name": "popuko",
+  "version": "1.0.0",
+  "author": "Spikan",
+  "description": "your emojis, everywhere",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-binaries": "^3.2.2-3",
+    "opusscript": "0.0.6"
+  }
+}
