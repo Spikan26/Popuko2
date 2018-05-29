@@ -156,11 +156,18 @@ bot.on("message", function (message) {
 
     //sépare les mots de la phrase (ne compte pas le PREFIX)
     var args = message.content.substring(PREFIX.length).split(" ");
-
-	const emoji = bot.emojis.find("name", args[0]);
-	if (emoji != null){
-		message.delete();
-		message.reply(`${emoji}`);
+	
+	var messageBuild = ""
+	for(var i=0;i<args.length; i++){
+		var emoji = bot.emojis.find("name", args[i]);
+		if (emoji != null){
+			messageBuild = messageBuild + " " + `${emoji}`;;
+		} else {
+			messageBuild = messageBuild + " " + args[i];
+		}
+	}
+	if (messageBuild != null) {
+		message.reply(messageBuild);
 	}
 });
 
