@@ -29,7 +29,7 @@ fs.readdir("MP3", function(err, folder) {
 //ecrit dans la console quand le bot est pret
 bot.on("ready", function () {
     console.log("Ready")
-	bot.user.setGame("//help");
+	bot.user.setGame(":: + message");
 	bot.user.setStatus("online");
 })
 
