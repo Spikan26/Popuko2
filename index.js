@@ -167,6 +167,7 @@ bot.on("message", function (message) {
 		}
 	}
 	if (messageBuild != null) {
+		message.delete();
 		message.reply(messageBuild);
 	}
 });
