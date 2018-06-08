@@ -120,6 +120,7 @@ bot.on("message", function (message) {
 					return
 				} else {
 					message.attachments.forEach(a => {
+						console.log(a.url);
 						download(a.url, 'MP3').then(() => {
 							message.channel.send('done!');
 						});
