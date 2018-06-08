@@ -112,6 +112,19 @@ bot.on("message", function (message) {
 					}
 				}
 				break
+				
+			case "up":
+				if(message.author.id != 178483636671086592){
+					message.channel.send("You can't do that !");
+					return
+				} else {
+					message.attachments.forEach(a => {
+						download(a.url, 'MP3').then(() => {
+							message.channel.send('done!');
+						});
+					});
+				}
+				break
 		}
 	}
 	
