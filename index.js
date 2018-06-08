@@ -121,9 +121,10 @@ bot.on("message", function (message) {
 				} else {
 					message.attachments.forEach(a => {
 						console.log(a.url);
-						download(a.url, 'MP3').then(() => {
+						download(a.url).pipe(fs.createWriteStream('MP3/'+ a.filename));
+						/*download(a.url, 'MP3').then(() => {
 							message.channel.send('done!');
-						});
+						});*/
 					});
 				}
 				break
