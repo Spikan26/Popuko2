@@ -4,7 +4,8 @@
 
 const Discord = require("discord.js"); //Bibliothèque Javascript de Discord
 
-var fs = require("fs");
+const fs = require("fs");
+const download = require('download');
 
 const PREFIX = "::";	//Ce qu'il y a au début de la commande, exemple ici : "-:ping"
 const PREFIXCOMMAND = "//";
