@@ -142,7 +142,7 @@ bot.on("message", function (message) {
 	
 	
 	if (!message.guild) return;
-	if (message.content.toLowerCase().startsWith(PREFIX_SOUND)){
+	/*if (message.content.toLowerCase().startsWith(PREFIX_SOUND)){
 		
 		var args = message.content.substring(PREFIX_SOUND.length).split(" ");
 
@@ -171,7 +171,7 @@ bot.on("message", function (message) {
 				}
 			}
 		}
-	}
+	}*/
 	
 	
 
