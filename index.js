@@ -72,6 +72,14 @@ bot.on("message", function (message) {
 				message.delete();
 				message.reply(ListEmoji[randemo]);
 				break
+				
+			case "servlist":
+				if (message.author.id != 178483636671086592){
+					message.channel.send("Wrong User");
+				} else {
+					var guild = bot.guilds;
+					console.log(guild);
+				}
 			
 			case "list":
 				if (!args[1]) currentPage = 0;
