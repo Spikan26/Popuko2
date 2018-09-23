@@ -1,11 +1,6 @@
-//////////////////////////////////////////
-///		POPUKO BOT (with new emojis)
-//////////////////////////////////////////
-
-const Discord = require("discord.js"); //Bibliothèque Javascript de Discord
+﻿const Discord = require("discord.js"); //Bibliothèque Javascript de Discord
 
 const fs = require("fs");
-const download = require('download');
 
 const PREFIX = "::";	//Ce qu'il y a au début de la commande, exemple ici : "-:ping"
 const PREFIXCOMMAND = "//";
@@ -27,10 +22,9 @@ fs.readdir("MP3", function(err, folder) {
 });
 
 
-//ecrit dans la console quand le bot est pret
 bot.on("ready", function () {
     console.log("Ready")
-	bot.user.setGame(":: + message");
+	bot.user.setActivity(":: + message");
 	bot.user.setStatus("online");
 })
 
@@ -50,7 +44,7 @@ bot.on("message", function (message) {
 			case "help":
 				if (!args[1])
 				{
-					message.channel.send("List of commands : `//random`, `//list`, `//large`");
+					message.channel.send("List of commands : `//random`, `//list`, `//large`, `mak.help`");
 					message.channel.send("Normal Usage : `::[name of the emoji]`	(example : `::citron`)")
 					return;
 				}
@@ -101,19 +95,30 @@ bot.on("message", function (message) {
 				message.channel.send({ embed});
 				message.channel.send("Page " + (currentPage + 1) + " / " + (pageTot + 1));
 				break
-			
+				
 			case "large":
+			
 				if (!args[1]) {
 					message.channel.send("No emoji specified");
 					return;
 				}
 				else
 				{
-					var large = bot.emojis.findKey("name", args[1]);
+						var namemoji = args[1].split(":");
+						if (namemoji[1] == null){
+							var large = bot.emojis.find("name", namemoji[0]);
+						} else {
+							var large = bot.emojis.find("name", namemoji[1]);
+						}
+					
 					if (large != null)
 					{
 						message.delete();
-						message.reply("https://cdn.discordapp.com/emojis/" + large + ".png");
+						if (large.animated == true){
+							message.reply("https://cdn.discordapp.com/emojis/" + large.id + ".gif");
+						} else {
+							message.reply("https://cdn.discordapp.com/emojis/" + large.id + ".png");
+						}
 					}
 					else
 					{
@@ -122,7 +127,39 @@ bot.on("message", function (message) {
 				}
 				break
 				
-			case "up":
+				
+			/*case "gitout":
+				if(message.author.id != 178483636671086592){
+					message.channel.send("You can't do that !");
+					return
+				} else {
+					// Make sure the bot user has permissions to make channels and move members in the guild:
+					if (!message.guild.me.hasPermission(['MANAGE_CHANNELS', 'MOVE_MEMBERS'])) return message.reply('Missing the required `Manage Channels` and `Move Members` permissions.');
+					 
+					// Get the mentioned user/bot and check if they're in a voice channel:
+					const member = message.mentions.members.first();
+					if (!member) return message.reply('You need to @mention a user/bot to kick from the voice channel.');
+					if (!member.voiceChannel) return message.reply('That user/bot isn\'t in a voice channel.');
+					 
+					// Now we make a temporary voice channel, move the user/bot into the channel, and delete it:
+					const temp_channel = await message.guild.createChannel(user.id, 'voice', [
+					  { id: guild.id,
+						deny: ['VIEW_CHANNEL', 'CONNECT', 'SPEAK'], },
+					  { id: member.id,
+						deny: ['VIEW_CHANNEL', 'CONNECT', 'SPEAK'] }
+					]);
+					await member.setVoiceChannel(temp_channel);
+					 
+					await temp_channel.delete();
+					 
+					// Finally, pass some user response to show it all worked out:
+					message.react('??');
+					/* or just "message.reply", etc.. up to you! 
+				}
+				break*/
+				
+				
+			/*case "up":
 				if(message.author.id != 178483636671086592){
 					message.channel.send("You can't do that !");
 					return
@@ -130,19 +167,16 @@ bot.on("message", function (message) {
 					message.attachments.forEach(a => {
 						console.log(a.url);
 						download(a.url).pipe(fs.createWriteStream('MP3/'+ a.filename));
-						/*download(a.url, 'MP3').then(() => {
-							message.channel.send('done!');
-						});*/
 					});
 				}
-				break
+				break*/
 		}
 	}
 	
 	
 	
 	if (!message.guild) return;
-	/*if (message.content.toLowerCase().startsWith(PREFIX_SOUND)){
+	if (message.content.toLowerCase().startsWith(PREFIX_SOUND)){
 		
 		var args = message.content.substring(PREFIX_SOUND.length).split(" ");
 
@@ -171,7 +205,7 @@ bot.on("message", function (message) {
 				}
 			}
 		}
-	}*/
+	}
 	
 	
 
@@ -197,4 +231,4 @@ bot.on("message", function (message) {
 });
 
 //connecte le bon bot.
-bot.login(process.env.BOT_TOKEN)
+bot.login("process.env.BOT_TOKEN")
